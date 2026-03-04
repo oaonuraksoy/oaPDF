@@ -1,0 +1,249 @@
+:root {
+  --primary-color: #0056b3;
+  --secondary-color: #f8f9fa;
+  --border-color: #dee2e6;
+  --text-color: #333;
+  --font-family: "Helvetica", Arial, sans-serif;
+
+  /* Gerçek kart boyutları (80x50 mm). Ekranda görünmesi için x5 büyütüldü (Oran korundu) */
+  --card-width: 400px; /* 80.0mm * 5 */
+  --card-height: 250px; /* 50.0mm * 5 */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: #e9ecef;
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 1000px;
+  max-width: 95vw;
+  overflow: hidden;
+}
+
+/* Sol Form Paneli */
+.form-panel {
+  flex: 1;
+  padding: 30px;
+  border-right: 1px solid var(--border-color);
+}
+
+.logo-container {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.logo-container h2 {
+  color: var(--primary-color);
+  margin-bottom: 5px;
+}
+
+.logo-container p {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 0.9em;
+}
+
+.form-group input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1em;
+}
+
+.form-group input[type="text"]:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 5px rgba(0, 86, 179, 0.3);
+}
+
+.form-group input[type="file"] {
+  width: 100%;
+  padding: 8px 0;
+}
+
+.form-group small {
+  display: block;
+  color: #888;
+  margin-top: 5px;
+  font-size: 0.8em;
+}
+
+.button-container {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  width: 100%;
+  border-radius: 6px;
+  font-size: 1.1em;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #004494;
+}
+
+.btn-primary:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+#statusMessage {
+  margin-top: 15px;
+  font-size: 0.9em;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.hidden {
+  display: none;
+}
+
+.success {
+  background: #d4edda;
+  color: #155724;
+}
+
+.error {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* Sağ Önizleme Paneli */
+.preview-panel {
+  flex: 1;
+  background: var(--secondary-color);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Canlı Kart Tasarımı (Oranlar Tahminidir, Gerçek yerleşime göre refactor edilecek) */
+.card-preview {
+  width: var(--card-width);
+  height: var(--card-height);
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+  /* Eğer arka plan resmi eklenecekse: */
+  background-image: url("../img/on.jpg");
+  background-size: cover;
+  background-position: center;
+  /* background: linear-gradient(135deg, rgba(238, 238, 238, 1) 0%, rgba(204, 204, 204, 1) 100%); */
+}
+
+.photo-mask {
+  position: absolute;
+  top: 35%; /* Beyaz alanın dikey ortasına (hizaya) çekildi */
+  left: 72%;
+  width: 22%; /* 400'ün %22'si */
+  height: 49%; /* 250'nin %49'u */
+  border-radius: 12px; /* Hafif yumuşatılmış kare */
+  overflow: hidden;
+  background-color: #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.photo-mask img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.text-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.preview-name {
+  position: absolute;
+  top: 49%;
+  left: 5%;
+  font-size: 1.25em; /* ~20px */
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.preview-title {
+  position: absolute;
+  top: 57%; /* İsme yakın ve beyaz alanın dikey ortasını destekleyecek şekilde */
+  left: 5%;
+  font-size: 1em; /* ~16px */
+  font-weight: normal;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.preview-id {
+  position: absolute;
+  top: 90%; /* Alta daha yakın (mavi/mor şerit içine) */
+  left: 72%;
+  width: 22%;
+  text-align: center;
+  font-size: 0.9em; /* ~14.4px */
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Telif Hakkı (Alt Bilgi) */
+.footer {
+  margin-top: 20px;
+  font-size: 0.9em;
+  color: #6c757d;
+  font-weight: bold;
+  text-align: center;
+}

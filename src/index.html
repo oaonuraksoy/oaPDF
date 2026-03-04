@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HRS Yaka Kartı Otomasyonu</title>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Helvetica:wght@400;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Sol Taraf: Form -->
+      <div class="form-panel">
+        <div class="logo-container">
+          <h2>HRS Yaka Kartı Sistemi</h2>
+          <p>Personel bilgilerini girin ve PDF oluşturun.</p>
+        </div>
+
+        <form id="cardForm">
+          <div class="form-group">
+            <label for="firstName">İsim:</label>
+            <input type="text" id="firstName" required placeholder="Örn: Ayşe" />
+          </div>
+
+          <div class="form-group">
+            <label for="lastName">Soyisim:</label>
+            <input type="text" id="lastName" required placeholder="Örn: Yılmaz" />
+          </div>
+
+          <div class="form-group">
+            <label for="title">Ünvan:</label>
+            <input type="text" id="title" required placeholder="Örn: Hemşire" />
+          </div>
+
+          <div class="form-group">
+            <label for="idNumber">Sicil No:</label>
+            <input type="text" id="idNumber" required placeholder="Örn: 12345" />
+          </div>
+
+          <div class="form-group">
+            <label for="photoFile">Personel Fotoğrafı:</label>
+            <input type="file" id="photoFile" accept="image/png, image/jpeg, image/jpg" required />
+            <small>Lütfen dikey veya kare bir fotoğraf seçin.</small>
+          </div>
+
+          <div class="button-container">
+            <button type="submit" class="btn-primary" id="generateBtn">PDF Oluştur ve Kaydet</button>
+            <div id="statusMessage" class="hidden"></div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Sağ Taraf: Canlı Önizleme -->
+      <div class="preview-panel">
+        <div class="preview-header">
+          <h3>Canlı Önizleme (Ön Yüz)</h3>
+        </div>
+
+        <div class="card-preview" id="cardPreview">
+          <!-- Arka plan resmi olarak ykaakartı.pdf'in 1. sayfasının görüntüsü gelecek -->
+          <!-- Fakat şimdilik arkaplan olarak grid veya renk verebiliriz. -->
+          <div class="photo-mask">
+            <img id="previewImage" src="" alt="" style="display: none" />
+          </div>
+
+          <div class="text-layer">
+            <div id="previewName" class="preview-name">Personel Adı Soyadı</div>
+            <div id="previewTitle" class="preview-title">Ünvanı</div>
+            <div id="previewId" class="preview-id">Sicil No: 00000</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Uygulama Alt Bilgisi -->
+    <div class="footer">Onur AKSOY Tarafından Sevgi ile üretilmiştir ❤️</div>
+
+    <script src="renderer.js"></script>
+  </body>
+</html>
